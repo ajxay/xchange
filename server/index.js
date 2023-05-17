@@ -18,14 +18,14 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-app.use("/posts", postRoutes);
-app.use("/users", userRoutes);
-app.use("/admin", adminRoutes);
-app.use("/openai", openaiRoutes);
-app.use("/swap", swapRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/openai", openaiRoutes);
+app.use("/api/swap", swapRoutes);
 
 const CONNECTION_URL = process.env.DATABASE_URL;
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 mongoose
   .connect(CONNECTION_URL, {
     useNewUrlParser: true,
