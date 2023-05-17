@@ -8,6 +8,7 @@ import adminRoutes from "./routes/admin.js";
 import openaiRoutes from "./routes/openai.js";
 import swapRoutes from "./routes/swapRoutes.js";
 import morgan from "morgan";
+import path from "path";
 
 import dotenv from "dotenv";
 
@@ -23,6 +24,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/openai", openaiRoutes);
 app.use("/api/swap", swapRoutes);
+
+app.use(express.static(path.join(__dirname, "public")));
 
 const CONNECTION_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 3000;
