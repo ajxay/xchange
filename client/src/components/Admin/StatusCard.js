@@ -7,20 +7,26 @@ import Icon from "@material-tailwind/react/Icon";
 
 export default function StatusCard({
   color,
-  icon,
   title,
   amount,
   percentage,
   percentageColor,
   percentageIcon,
   date,
+  MainIcon,
 }) {
   return (
-    <div className="px-4 mb-10">
+    <div className="px-4 mb-4 -mt-8">
       <Card>
         <CardRow>
-          <CardHeader color={color} iconOnly className="mb-0">
-            <Icon name={icon} size="3xl" color="white" />
+          <CardHeader
+            style={{ width: "30px", height: "100px" }}
+            color={color}
+            iconOnly
+            className="mb-0"
+          >
+            {/* <Icon name={icon} size="3xl" color="white" /> */}
+            <MainIcon className="text-2xl" />
           </CardHeader>
 
           <CardStatus title={title} amount={amount} />
@@ -30,9 +36,7 @@ export default function StatusCard({
           amount={percentage}
           color={percentageColor}
           date={date}
-        >
-          <Icon color={percentageColor} name={percentageIcon} />
-        </CardStatusFooter>
+        ></CardStatusFooter>
       </Card>
     </div>
   );

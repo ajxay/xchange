@@ -11,7 +11,7 @@ function Posts({ setCurrentId, setShowModal }) {
   ) : (
     <Container>
       {posts.map((post) => {
-        if (post.exchanged) {
+        if (post.exchanged === true || post.removed === true) {
           return (
             <React.Fragment key={post._id}>
               {/* Add your exchanged post UI here */}

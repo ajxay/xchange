@@ -2,12 +2,14 @@ import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import Image from "@material-tailwind/react/Image";
-import Progress from "@material-tailwind/react/Progress";
+// import Progress from "@material-tailwind/react/Progress";
 import { Switch } from "@headlessui/react";
 import { useState } from "react";
 import team1 from "../../assets/img/team-1-800x800.jpg";
 import { useDispatch } from "react-redux";
 import { deactivateUser } from "../../actions/users";
+import moment from "moment";
+
 export default function CardTable({ users }) {
   const dispatch = useDispatch();
   const [enabled, setEnabled] = useState(false);
@@ -17,8 +19,8 @@ export default function CardTable({ users }) {
   };
   return (
     <Card>
-      <CardHeader color="purple" contentPosition="left">
-        <h2 className="text-white text-2xl">Card Table</h2>
+      <CardHeader color="yellow" contentPosition="left">
+        <h2 className="text-slate-600 text-2xl">Users</h2>
       </CardHeader>
       <CardBody>
         <div className="overflow-x-auto">
@@ -38,7 +40,7 @@ export default function CardTable({ users }) {
                   Disable
                 </th>
                 <th className="px-2 text-purple-500 align-middle border-b border-solid border-gray-200 py-3 text-sm whitespace-nowrap font-light text-left">
-                  Exchanges
+                  Account Created
                 </th>
               </tr>
             </thead>
@@ -82,7 +84,11 @@ export default function CardTable({ users }) {
                         </Switch>
                       </th>
                       <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                        <Progress color="red" value="60" />
+                        {/* <Progress color="red" value="60" />
+                         */}
+                        <span className="bg-slate-900 opacity-70 px-3 py-1 text-white rounded-full text-xs uppercase">
+                          {moment(user?.createdAt).fromNow()}
+                        </span>
                       </th>
                     </tr>
                   </>

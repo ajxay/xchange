@@ -83,3 +83,12 @@ export const declineRequest = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+export const getAllRequest = async (req, res) => {
+  try {
+    const request = await SwapRequest.find();
+    res.status(200).json(request);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};

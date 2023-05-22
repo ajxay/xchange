@@ -1,15 +1,13 @@
-import { useEffect } from "react";
-import StatusCard from "../../Admin/StatusCard";
 import TableCard from "../../Admin/TableCard";
-import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../../actions/users";
+import { useSelector } from "react-redux";
+// import { getUsers } from "../../../actions/users";
 const Users = () => {
   const users = useSelector((state) => state.users);
+  const requests = useSelector((state) => state.requests);
 
-  console.log(users, "users from users");
   return (
     <>
-      <div className="bg-light-blue-500 pt-14 pb-28 px-3 md:px-8 h-auto">
+      {/* <div className="bg-light-blue-500 pt-14 pb-28 px-3 md:px-8 h-auto">
         <div className="container mx-auto max-w-full">
           <div className="grid ss:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
             <StatusCard
@@ -54,12 +52,12 @@ const Users = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="px-3 md:px-8 h-auto -mt-24">
+      <div className="px-3 bg-slate-700 h-screen md:px-8 py-11 ">
         <div className="container mx-auto max-w-full">
           <div className="grid grid-cols-1 px-4 mb-16">
-            <TableCard users={users} />
+            <TableCard requests={requests} users={users} />
           </div>
         </div>
       </div>

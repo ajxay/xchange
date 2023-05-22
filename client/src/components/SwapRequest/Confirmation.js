@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { acceptRequest, declineRequest } from "../../api";
 import Chat from "../PostDetails/Chat";
+import PropTypes from "prop-types";
+import { useAlert } from "react-alert";
 
 const Confirmation = ({ showModal, setShowModal, requestId }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -10,7 +12,8 @@ const Confirmation = ({ showModal, setShowModal, requestId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [acceptedReq, setAcceptedReq] = useState(null);
   const [openChat, setOpenChat] = useState(false);
-  console.log(acceptedReq, "acceptedReq");
+
+  const alert = useAlert();
 
   const request = useSelector(
     (state) => state.requests.filter((reqest) => requestId === reqest._id)[0]
@@ -29,16 +32,18 @@ const Confirmation = ({ showModal, setShowModal, requestId }) => {
   };
   const handleDecline = () => {
     declineRequest(request._id);
+    alert.show("Request Declined!");
     setShowModal(false);
   };
   const handleAccept = async () => {
     if (!selectedValue) {
-      alert("Not selected Any option");
+      alert.show("Not selected Any option");
     } else {
       setIsLoading(true);
       const { data } = await acceptRequest(request._id, selectedValue);
       setAcceptedReq(data);
       setIsLoading(false);
+      alert.show("Request Accepted");
     }
   };
 
@@ -254,6 +259,12 @@ const Confirmation = ({ showModal, setShowModal, requestId }) => {
       ) : null}
     </div>
   );
+};
+
+Confirmation.propTypes = {
+  requestId: PropTypes.string.isRequired,
+  showModal: PropTypes.bool,
+  setShowModal: PropTypes.func,
 };
 
 export default Confirmation;

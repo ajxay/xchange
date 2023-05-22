@@ -1,9 +1,9 @@
 import axios from "axios";
 
 // for dev
-// const API = axios.create({ baseURL: "http://localhost:3000/api" });
+const API = axios.create({ baseURL: "http://localhost:3000/api" });
 // for prod
-const API = axios.create({ baseURL: "https://ajayasok.tk/api" });
+// const API = axios.create({ baseURL: "https://ajayasok.tk/api" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -53,7 +53,7 @@ export const updateUser = (id, userData) => API.patch(`/users/${id}`, userData);
 
 export const deactivateAccount = (id) =>
   API.patch(`/admin/users/${id}/deactivate`);
-
+export const disablePost = (id) => API.patch(`/admin/posts/${id}/disable`);
 //summary
 export const getSummary = (title) =>
   API.get(`/openai/summary?title=${title || "none"}`);
@@ -65,3 +65,5 @@ export const swapNotification = () => API.get("/swap");
 export const acceptRequest = (id, selected) =>
   API.get(`/swap/accept?requestId=${id}&selected=${selected}`);
 export const declineRequest = (id) => API.get(`/swap/decline/${id}`);
+//for admin
+export const swapRequests = () => API.get("/swap/requests/");

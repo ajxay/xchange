@@ -4,9 +4,7 @@ import {
   UPDATE,
   CREATE,
   FETCH_BY_SEARCH,
-  FETCH_BY_LOCATION,
-  START_LOADING,
-  STOP_LOADING,
+  DISABLE_POST,
   COMMENT,
   FETCH_POST,
 } from "../constants/actionTypes";
@@ -34,7 +32,6 @@ export const getPosts = () => async (dispatch) => {
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
     const { data } = await api.fetchPostsBySearch(searchQuery);
-    console.log(data);
     dispatch({ type: FETCH_BY_SEARCH, payload: data });
   } catch (error) {
     console.log(error);
@@ -79,7 +76,6 @@ export const deletePost = (id) => async (dispatch) => {
 export const likePost = (id) => async (dispatch) => {
   try {
     const { data } = await api.likePost(id);
-    console.log(data, "data");
     dispatch({ type: UPDATE, payload: data });
   } catch (error) {
     console.log(error);
@@ -87,11 +83,20 @@ export const likePost = (id) => async (dispatch) => {
 };
 
 export const commentPost = (value, id) => async (dispatch) => {
-  console.log("dispatched");
   try {
     const { data } = await api.comment(value, id);
     dispatch({ type: COMMENT, payload: data });
     return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const disablePost = (id) => async (dispatch) => {
+  console.log("dispatched");
+  try {
+    const { data } = await api.disablePost(id);
+    dispatch({ type: DISABLE_POST, payload: data });
   } catch (error) {
     console.log(error);
   }

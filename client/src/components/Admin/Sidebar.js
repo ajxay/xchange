@@ -2,38 +2,26 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar";
 import { FcList, FcMindMap, FcSettings } from "react-icons/fc";
-import { useEffect } from "react";
-import { getUsers } from "../../actions/users";
-import { useDispatch, useSelector } from "react-redux";
+
+import logo from "../../logo/logo.png";
 
 export default function Sidebar() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
-
-  const users = useSelector((state) => state.users);
-  console.log(users);
   const [showSidebar, setShowSidebar] = useState("-left-64");
   return (
     <>
       <AdminNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
       <div
-        className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-white w-64 z-10 py-4 px-6 transition-all duration-300`}
+        className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-slate-900 w-64 z-10 py-4 px-6 transition-all duration-300`}
       >
         <div className="flex-col items-stretch min-h-full flex-nowrap px-0 relative">
-          <a
-            href="https://material-tailwind.com?ref=mtd"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-2 text-center w-full inline-block"
-          >
-            <h6 color="gray">Material Tailwind</h6>
-          </a>
-          <div className="flex flex-col">
-            <hr className="my-4 min-w-full" />
-
+          <div className="flex justify-between">
+            <img src={logo} alt="" className="h-12 inline-block" />
+            <h6 className="uppercase text-white text-md tracking-wider mt-4 ">
+              admin
+            </h6>
+          </div>
+          <hr className="my-2 min-w-full" />
+          <div className="flex mt-6 flex-col">
             <ul className="flex-col min-w-full flex list-none">
               <li className="rounded-lg mb-4">
                 <NavLink
@@ -41,15 +29,15 @@ export default function Sidebar() {
                   end
                   className={({ isActive }) =>
                     isActive
-                      ? "flex items-center gap-4 rounded-sm p-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-xl"
-                      : "flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                      ? "flex items-center gap-4 rounded-sm p-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-slate-200 shadow-xl"
+                      : "flex items-center gap-4 text-sm text-slate-200 font-light px-4 py-3 rounded-lg"
                   }
                 >
                   <FcSettings size={25} />
                   Dashboard
                 </NavLink>
               </li>
-              <li className="rounded-lg mb-2">
+              {/* <li className="rounded-lg mb-2">
                 <NavLink
                   to="/admin/settings"
                   className={({ isActive }) =>
@@ -61,31 +49,35 @@ export default function Sidebar() {
                   <FcSettings size={25} />
                   Settings
                 </NavLink>
-              </li>
+              </li> */}
               <li className="rounded-lg mb-2 ">
                 <NavLink
-                  to="/admin/tables"
+                  to="/admin/posts"
                   className={({ isActive }) =>
                     isActive
                       ? "flex items-center gap-4 rounded-sm p-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-xl"
-                      : "flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                      : "flex items-center gap-4 text-sm text-gray-200 font-light px-4 py-3 rounded-lg"
                   }
                 >
                   <FcList size={25} />
-                  Tables
+                  Posts
                 </NavLink>
               </li>
               <li className="rounded-lg mb-2 text-gray-700">
                 <NavLink
                   to="/admin/users"
-                  className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                  activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                  end
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center gap-4 rounded-sm p-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-slate-200 shadow-xl"
+                      : "flex items-center gap-4 text-sm text-slate-200 font-light px-4 py-3 rounded-lg"
+                  }
                 >
                   <FcMindMap size={25} />
                   Users
                 </NavLink>
               </li>
-              <li className="px-4 rounded-lg mb-2 text-gray-700">
+              {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
                 <a
                   href="https://demos.creative-tim.com/material-tailwind-kit-react/#/login"
                   target="_blank"
@@ -95,8 +87,8 @@ export default function Sidebar() {
                   <FcMindMap size={25} />
                   Login
                 </a>
-              </li>
-              <li className="px-4 rounded-lg mb-2 text-gray-700">
+              </li> */}
+              {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
                 <a
                   href="https://demos.creative-tim.com/material-tailwind-kit-react/#/register"
                   target="_blank"
@@ -106,8 +98,8 @@ export default function Sidebar() {
                   <FcMindMap size={25} />
                   Register
                 </a>
-              </li>
-              <li className="px-4 rounded-lg mb-2 text-gray-700">
+              </li> */}
+              {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
                 <a
                   href="https://demos.creative-tim.com/material-tailwind-kit-react/#/landing"
                   target="_blank"
@@ -128,9 +120,9 @@ export default function Sidebar() {
                   <FcMindMap size={25} />
                   Profile Page
                 </a>
-              </li>
+              </li> */}
             </ul>
-
+            {/* 
             <ul className="flex-col min-w-full flex list-none absolute bottom-0">
               <li className="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 px-4 rounded-lg text-white mb-2">
                 <a
@@ -153,7 +145,7 @@ export default function Sidebar() {
                   Free Download
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>

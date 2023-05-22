@@ -8,16 +8,18 @@ import Sidebar from "../../Admin/Sidebar";
 
 const Admin = () => {
   return (
-    <Sidebar>
-      <div className="md:ml-64">
-        <Routes>
-          <Route path="/" Component={Dashboard} />
-          <Route path="/admin/settings" element={Settings} />
-          <Route path="/admin/tables" element={Tables} />
-          <Route path="/users" element={Users} />
-        </Routes>
-      </div>
-    </Sidebar>
+    <div>
+      <Sidebar>
+        <div className="md:ml-64">
+          <Routes>
+            <Route path="/" Component={Dashboard} />
+            <Route path="/admin/settings" element={Settings} />
+            <Route path="/admin/tables" element={Tables} />
+            <Route path="/users" element={Users} />
+          </Routes>
+        </div>
+      </Sidebar>
+    </div>
   );
 };
 

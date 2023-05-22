@@ -38,6 +38,14 @@ const postSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  removed: {
+    type: Boolean,
+    default: false,
+  },
+  spamReports: {
+    type: [String],
+    default: [],
+  },
 });
 postSchema.index({ location: "2dsphere" });
 

@@ -6,6 +6,9 @@ export const FETCH_POST = "FETCH_POST";
 export const FETCH_BY_SEARCH = "FETCH_BY_SEARCH";
 export const FETCH_BY_LOCATION = "FETCH_BY_LOCATION";
 
+//admin
+export const DISABLE_POST = "DISABLE_POST";
+
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
 export const COMMENT = "COMMENT";
@@ -15,4 +18,5 @@ export const COMMENT = "COMMENT";
 export const FETCH_USERS = "FETCH_USERS";
 export const DEACTIVATE_USER = "DEACTIVATE_USER";
 export const FETCH_REQUESTS = "FETH_REQUESTS";
+export const FETCH_ALL_REQUESTS = "FETCH_ALL_REQUESTS";
 export const UPDATE_USER = "UPDATE_USER";

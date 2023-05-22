@@ -9,15 +9,17 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Dashboard from "./components/Pages/Admin/Dashboard";
 import Sidebar from "./components/Admin/Sidebar";
 import Settings from "./components/Pages/Admin/Settings";
-import Tables from "./components/Pages/Admin/Tables";
+// import Tables from "./components/Pages/Admin/Tables";
 import Users from "./components/Pages/Admin/Users";
 import ChatsPage from "./components/ChatsPage";
-import Modal from "./components/Form/Modal";
+// import Modal from "./components/Form/Modal";
 import ProfileCard from "./components/Admin/ProfileCard";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./utils/ErrorFallback";
 import Shimmer from "./components/Shimmer/Shimmer";
 import Requests from "./components/Navbar/Requests";
+import Posts from "./components/Pages/Admin/Posts";
+
 const Home = lazy(() => import("./components/Pages/User/Home/Home"));
 
 function App() {
@@ -47,7 +49,7 @@ function App() {
               }
             />
             <Route path="/admin/settings" Component={Settings} />
-            <Route path="/admin/tables" Component={Tables} />
+            <Route path="/admin/posts" Component={Posts} />
             <Route path="/admin/users" Component={Users} />
           </Routes>
         </div>

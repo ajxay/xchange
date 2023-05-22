@@ -3,7 +3,7 @@ import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import createChatUser from "../helpers/createChatUser.js";
-import loginChatUser from "../helpers/LoginChatUser.js";
+import loginChatUser from "../helpers/loginChatUser.js";
 
 export const signin = async (req, res) => {
   const { email, password } = req.body;

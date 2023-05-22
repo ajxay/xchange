@@ -1,4 +1,4 @@
-import { FETCH_REQUESTS, LOGOUT } from "../constants/actionTypes";
+import { FETCH_REQUESTS } from "../constants/actionTypes";
 
 const requests = (requests = [], action) => {
   switch (action.type) {

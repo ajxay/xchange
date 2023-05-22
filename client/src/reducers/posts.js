@@ -6,6 +6,7 @@ import {
   FETCH_BY_SEARCH,
   FETCH_POST,
   COMMENT,
+  DISABLE_POST,
 } from "../constants/actionTypes";
 
 const posts = (posts = [], action) => {
@@ -36,6 +37,11 @@ const posts = (posts = [], action) => {
 
     case DELETE:
       return posts.filter((post) => post._id !== action.payload);
+
+    case DISABLE_POST:
+      return posts.map((post) =>
+        post._id === action.payload._id ? action.payload : post
+      );
 
     default:
       return posts;

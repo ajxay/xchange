@@ -1,11 +1,12 @@
 import { Configuration, OpenAIApi } from "openai";
 
 export const getSummary = async (req, res) => {
+  console.log("reached");
   const { title } = req.query;
   console.log(title, "title");
   try {
     const configuration = new Configuration({
-      apiKey: "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",
+      apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
 
@@ -17,6 +18,8 @@ export const getSummary = async (req, res) => {
       presence_penalty: 0,
       max_tokens: 1048,
     });
+    console.log(completion, "completion");
+
     const summary = completion.data.choices[0].text;
     console.log(summary, "summary");
 

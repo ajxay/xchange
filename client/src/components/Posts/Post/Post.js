@@ -9,14 +9,16 @@ import {
   MdOutlineFavoriteBorder,
 } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { deletePost, likePost } from "../../../actions/posts";
+import { deletePost, likePost, updatePost } from "../../../actions/posts";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 function Post({ post, setCurrentId, setShowModal }) {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const menuRef = useRef();
@@ -46,6 +48,16 @@ function Post({ post, setCurrentId, setShowModal }) {
       setLikes(likes.filter((id) => id !== userId));
     } else {
       setLikes([...likes, userId]);
+    }
+  };
+
+  const handleSpam = (id) => {
+    if (post.spamReports.includes(id)) {
+      alert.show("Marked as Spam!");
+    } else {
+      post.spamReports.push(id);
+      dispatch(updatePost(id, post));
+      alert.show("Marked as Spam!");
     }
   };
 
@@ -106,47 +118,47 @@ function Post({ post, setCurrentId, setShowModal }) {
         <div className="relative inline-block text-left">
           <div>
             {/* //DropDown *************************************************************************/}
-            <Menu as="div" className="relative inline-block text-left">
-              <div>
-                <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm  hover:bg-gray-50">
-                  <MdMoreHoriz />
-                </Menu.Button>
-              </div>
+            {user && (
+              <Menu as="div" className="relative inline-block text-left">
+                <div>
+                  <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm  hover:bg-gray-50">
+                    <MdMoreHoriz />
+                  </Menu.Button>
+                </div>
 
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="py-1">
-                    {(user?.result?.sub === post?.creator ||
-                      user?.result?._id === post?.creator) && (
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            onClick={() => handleEdit()}
-                            className={classNames(
-                              active
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-700",
-                              "block px-4 py-2 text-sm"
-                            )}
-                          >
-                            Edit
-                          </a>
-                        )}
-                      </Menu.Item>
-                    )}
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="py-1">
+                      {(user?.result?.sub === post?.creator ||
+                        user?.result?._id === post?.creator) && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              onClick={() => handleEdit()}
+                              className={classNames(
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
+                              )}
+                            >
+                              Edit
+                            </a>
+                          )}
+                        </Menu.Item>
+                      )}
 
-                    <Menu.Item>
+                      {/* <Menu.Item>
                       {({ active }) => (
                         <a
-                          href="#"
                           className={classNames(
                             active
                               ? "bg-gray-100 text-gray-900"
@@ -157,9 +169,10 @@ function Post({ post, setCurrentId, setShowModal }) {
                           Duplicate
                         </a>
                       )}
-                    </Menu.Item>
-                  </div>
-                  <div className="py-1">
+                    </Menu.Item> */}
+                    </div>
+
+                    {/* <div className="py-1">
                     <Menu.Item>
                       {({ active }) => (
                         <a
@@ -222,32 +235,51 @@ function Post({ post, setCurrentId, setShowModal }) {
                         </a>
                       )}
                     </Menu.Item>
-                  </div>
-                  <div className="py-1">
-                    {(user?.result?.sub === post?.creator ||
-                      user?.result?._id === post?.creator) && (
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            onClick={() => {
-                              dispatch(deletePost(post._id));
-                            }}
-                            className={classNames(
-                              active
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-700",
-                              "block px-4 py-2 text-sm"
+                  </div> */}
+                    <div className="py-1">
+                      {(user?.result?.sub === post?.creator ||
+                        user?.result?._id === post?.creator) && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              onClick={() => {
+                                dispatch(deletePost(post._id));
+                              }}
+                              className={classNames(
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
+                              )}
+                            >
+                              Delete
+                            </a>
+                          )}
+                        </Menu.Item>
+                      )}
+                      {user?.result?.sub !== post?.creator &&
+                        user?.result?._id !== post?.creator && (
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                onClick={() => handleSpam(post._id)}
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "block px-4 py-2 text-sm"
+                                )}
+                              >
+                                Mark as spam
+                              </a>
                             )}
-                          >
-                            Delete
-                          </a>
+                          </Menu.Item>
                         )}
-                      </Menu.Item>
-                    )}
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            )}
           </div>
         </div>
       </div>

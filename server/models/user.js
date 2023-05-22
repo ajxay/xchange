@@ -32,6 +32,10 @@ const userSchema = mongoose.Schema({
   },
   id: { type: String },
   isActive: { type: Boolean, default: true },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 userSchema.index({ location: "2dsphere" });
