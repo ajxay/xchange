@@ -1,18 +1,27 @@
 import * as api from "../api";
 import { AUTH } from "../constants/actionTypes";
 
-export const signin = (formData, navigate) => async (dispatch) => {
-  try {
-    //sign inn the user
-    const { data } = await api.signIn(formData);
+export const signin =
+  (formData, navigate, setInputError) => async (dispatch) => {
+    try {
+      //sign inn the user
+      const { data } = await api.signIn(formData);
 
-    dispatch({ type: AUTH, data });
+      dispatch({ type: AUTH, data });
 
-    navigate("/posts");
-  } catch (error) {
-    console.log(error);
-  }
-};
+      navigate("/posts");
+    } catch (error) {
+      setInputError({
+        firstName: true,
+        lastName: false,
+        email: true,
+        password: true,
+        confirmPassword: false,
+        location: false,
+      });
+      console.log(error);
+    }
+  };
 
 export const signinAsAdmin = (formData, navigate) => async (dispatch) => {
   try {

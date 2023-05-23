@@ -5,7 +5,7 @@ export default async function loginChatUser(user) {
     method: "get",
     url: "https://api.chatengine.io/users/me",
     headers: {
-      "Project-ID": "9851ef2a-97da-48ab-82fc-fd7b3c92c5d2",
+      "Project-ID": "86388e40-d373-4ef0-a2c0-9ae00d1f89db",
       //   "Content-Type": "application/json",
       "User-Name": user.username,
       "User-secret": user.email,

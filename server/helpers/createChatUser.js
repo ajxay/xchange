@@ -12,7 +12,7 @@ export default function createChatUser(user) {
       method: "post",
       url: "https://api.chatengine.io/users/",
       headers: {
-        "PRIVATE-KEY": "faafa2e8-389c-4fa5-86f0-2e3182196681",
+        "PRIVATE-KEY": "3e8c1a60-8178-4a5f-9da4-c18fb867c816",
         "Content-Type": "application/json",
       },
       data: data,

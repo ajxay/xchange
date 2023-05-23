@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+// import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getPosts } from "../../actions/posts";
 import Chat from "./Chat";
-import CommentSection from "./CommentSection";
+// import CommentSection from "./CommentSection";
+import { useAlert } from "react-alert";
+
 import { fetchUser, swapRequest } from "../../api";
-import useReverseGeocode from "../../utils/useReverseGeocode";
+// import useReverseGeocode from "../../utils/useReverseGeocode";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 
 const PostDetails = () => {
+  const alert = useAlert();
+
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const handlePrevClick = () => {
@@ -62,7 +66,7 @@ const PostDetails = () => {
   };
   const sendRequest = () => {
     if (options.length < 1) {
-      alert("Select Option");
+      alert.show("Not selected Any option");
     } else {
       const requestObj = {
         book: post?._id,
@@ -78,6 +82,8 @@ const PostDetails = () => {
       } catch (error) {
         console.log(error);
       }
+      alert.show("Xchange Request Sent");
+
       SetOptions([]);
       setShowModal(false);
     }
@@ -96,7 +102,7 @@ const PostDetails = () => {
       <div className="lg:w-1/3 md:w-1/2 p-4 w-full bg-slate-900 m-5   text-slate-400 rounded">
         <div className="block relative h-58 rounded overflow-hidden">
           <img
-            alt="Book Image"
+            alt="Book"
             className="object-cover object-center w-full h-4/3 block"
             src={post?.selectedFile}
           />
@@ -135,7 +141,7 @@ const PostDetails = () => {
               borderRadius: "3px",
             }}
           >
-            {isOpen && "Close"} Chat with Seller
+            {isOpen && "Close"} Xchange Request
           </button>
         )}
       </div>

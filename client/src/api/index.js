@@ -1,9 +1,9 @@
 import axios from "axios";
 
 // for dev
-const API = axios.create({ baseURL: "http://localhost:3000/api" });
+// const API = axios.create({ baseURL: "http://localhost:3000/api" });
 // for prod
-// const API = axios.create({ baseURL: "https://ajayasok.tk/api" });
+const API = axios.create({ baseURL: "https://ajayasok.tk/api" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
