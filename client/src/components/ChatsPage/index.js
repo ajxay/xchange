@@ -4,7 +4,7 @@ import { ChatEngine } from "react-chat-engine";
 
 const ChatsPage = () => {
   const { result } = JSON.parse(localStorage.getItem("profile"));
-  const projectID = process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID;
+  const projectID = "6e702d58-f4d3-442b-a5df-472f7078dd46";
   console.log(result.username, result.email, projectID, "creds");
 
   return (

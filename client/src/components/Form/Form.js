@@ -83,8 +83,8 @@ function Form({ currentId, setCurrentId, setShowModal, showModal }) {
 
   if (!user?.result?.name) {
     return (
-      <div>
-        <p className="text-white">Please Log in to create posts</p>
+      <div className="bg-slate-900 flex justify-center align-middle mb-2 mt-5 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
+        <p className="text-white px-auto">Please Log in to create posts</p>
       </div>
     );
   }

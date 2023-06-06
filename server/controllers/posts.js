@@ -67,13 +67,13 @@ export const getPostsByLocation = async (req, res) => {
 export const createPost = async (req, res) => {
   // const creator = await User.findById(req.userId);
   const post = req.body;
-  console.log(req.body, "reqbody");
-  const newPost = new PostMessage({
-    ...post,
-    creator: req.userId,
-    createdAt: new Date().toISOString(),
-  });
+
   try {
+    const newPost = new PostMessage({
+      ...post,
+      creator: req.userId,
+      createdAt: new Date().toISOString(),
+    });
     await newPost.save();
     res.status(201).json(newPost);
   } catch (error) {

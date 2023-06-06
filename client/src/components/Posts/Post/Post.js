@@ -62,7 +62,11 @@ function Post({ post, setCurrentId, setShowModal }) {
   };
 
   const openPost = () => {
-    navigate(`/posts/${post._id}`);
+    if (user) {
+      navigate(`/posts/${post._id}`);
+    } else {
+      alert.show(" Login to continue!");
+    }
   };
 
   const Likes = () => {
